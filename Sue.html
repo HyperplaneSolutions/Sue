@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<!--MIT License Copyright (c) 2021 Filip Bebić
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
+
+<html>
+
+<head>
+    <title>Sue</title>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link
+        href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACm0lEQVRYhe3WX0hTURwH8AX1YBQxqQ2ul4wmIhO3dNVWw1BD2S6WMMW9SWjm21jRkw++tPkY5HY3UUvBSEu9f2Y6Z4pFwjAiNCVb/0x7qh6CeprHzq+Xro3lvXP3ziDwB+fp/u7v++FwDveqVLv1P5b9iL2uR98bGzGw8REju96r71upJeobdzzYoim1sgYeMwYOxJZNY3PsSHiN1nE5MWjEyG506buXAgXBBcbIocRnbt11T0bDySwyJzHgdPbZM8k9+QeLChgD91PoKTlcYsoY4L5h6JswWK1WHxLrM5lM+xJ2aD0j4QRB7BeGNpPNban6HYTDKfSTWWSOYkBVtr1OGFhWVrZ3O+8I/U1EU0pwynLlujzCwO2+I9wUj87LKAa4j7rb5QJu5Hn5XYBiAADsUbIUhd/1PI7O3PkK0/0/YGoQwdQwhkcMhgiLIcxhGOcxPAxhCI1i4McwsOMYmDCG4TCGBxMYBicx3OxbjsoKL84r1s91xeBpzxooRRQWlurTBtRYbdR853PIBOKc7RKVPsBcTr0MRkAUMYiAuzAL3MVZCA9vSCLKK2UBrNQiPQBiCMbI//kMG3nJnZAFqDWfpJY6/LAlovvzX/8BkaENUYRMwAnqta8dxBDJOyB1JmQCiqi3/lYQQ0SuzG0Cxq6+kTyYlfIA+dR72gViCO7U6CaAtYxL3g5ZgHrrcWol0AhbIgIR4Ew8sKbQ7zUqeUXlAcy51GrACaIIqSuahJAFcFpI+1qgGjKBqKposKcN0GkPaD7RFZAJhFar06QNUKlUqmvUsZZV3/n4qr8afaTr0Qe6Cb3zu1DM14pedXjR4i0fWvDfQ/P0BHoRfIaincvoSdcamrn9BU33f0eTA/F4g7OtRVb4bv2r+gVF7w/goRt6YgAAAABJRU5ErkJggg=="
+        rel="icon" type="image/x-icon" />
+
+    <link href="libs/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="libs/light-modal/light-modal.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/carousel.css">
+    <link href="libs/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/sue.css">
+
+    <script src="scripts/libs/jquery-3.6.0.min.js"></script>
+    <script src="scripts/libs/download.min.js"></script>
+    <script src="libs/toastr/toastr.min.js"></script>
+    <script src="libs/base64.js"></script>
+
+    <script src="scripts/utils/sue-encryption.js"></script>
+    <script src="scripts/utils/sue-encoding.js"></script>
+    <script src="scripts/utils/sue-files.js"></script>
+
+    <script src="scripts/models/key-file.js"></script>
+    <script src="scripts/models/sue-file.js"></script>
+
+    <script src="scripts/sue.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="title-div">
+            <div class=img-div>
+                <img src="content/images/sue_logo.png.png" />
+            </div>
+
+            <h1>Simple Unbreakable Encryption</h1>
+            <div class="about">
+                <p>
+                    Detailed operating instructions as well as explanations of the mechanisms and methods used in the
+                    applications can be found on the github page
+                </p>
+                <p>
+                    <a href="url">Github Repo LINK LINK LINK LINK</a>
+                </p>
+
+                <p>
+                    MIT License Copyright (c) 2021 Filip Bebić
+                </p>
+                <p class="license">
+                    WARNING: Encryption methods used by this application have not gone through any independent testing!
+                </p>
+            </div>
+        </div>
+
+        <div class="sue-app">
+            <div class="key-selection">
+                <button class="block-btn" type="button" onclick="onClickGenerateKeyFile();"> Generate Key </button>
+                <input type="file" id="keyFileInput" accept="*" class="visually-hidden">
+                <button class="block-btn" type="button" onclick="onClickReadKeyFile();"> Load Existing Key </button>
+                <div class="key-div d-none">
+                    <i class="fas fa-key"></i>
+                    <span class="key-name"></span>
+                    <span class="key-size"></span>
+                </div>
+            </div>
+
+            <div class="operation-selection d-none">
+                <div class="carousel">
+                    <div class="operation-switch">
+                        <button id="btnEncrypt" class="block-btn active" type="button" onclick="showSectionEncrypt();"> Encrypt </button>
+                        <button id="btnDecrypt" class="block-btn" type="button" onclick="showSectionDecrypt();"> Decrypt </button>
+                    </div>
+
+
+                    <div class="carousel-inner">
+
+                        <textarea id="taEncrypt" placeholder="Enter the data you want to encrypt" lang="UTF-8" class="left"></textarea>
+                        <textarea id="taDecrypt" placeholder="Enter the data you want to decrypt" lang="UTF-8" class="right"></textarea>
+
+                        <div id="slide-encryption" class="operation">
+                            <button type="button" class="block-btn" onclick="onClickEncryptText();"> <i class="fas fa-lock"></i> Encrypt Text </button>
+
+                            <input type="file" id="encryptFileInput" accept="*" class="visually-hidden">
+                            <button type="button" class="block-btn" onclick="onClickEncryptFile();"> <i class="fas fa-file-upload"></i> Encrypt File </button>
+
+                        </div>
+                        <div id="slide-decryption" class="d-none operation">
+                            
+                            <button type="button" class="block-btn" onclick="onClickDecryptText();"> <i class="fas fa-lock-open"></i> Decrypt Text </button>
+
+                            <input type="file" id="decryptFileInput" accept="*" class="visually-hidden">
+                            <button type="button" class="block-btn" onclick="onClickDecryptFile();"> <i class="fas fa-file-upload"></i>  Decrypt File </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
