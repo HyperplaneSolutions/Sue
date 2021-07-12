@@ -58,7 +58,6 @@ class SueEncryption {
             let encryptedBase64Sign = SueEncoding.BASE_64_SIGNS_ORDERED[encryptedInt];
             encryptedArray.push(encryptedBase64Sign);
         }
-        console.log(encryptedArray.join(''));
         return encryptedArray.join('');
     }
 
@@ -77,7 +76,6 @@ class SueEncryption {
 
 
         let decryptedArray = [];
-        console.log(base64Encrypted);
 
         for (let i = 0; i < base64Encrypted.length; i++) {
             let decryptedInt = SueEncoding.BASE_64_SIGNS_ORDERED.indexOf(base64Encrypted[i]) - SueEncoding.BASE_64_SIGNS_ORDERED.indexOf(key[keyStartIndex + i]);

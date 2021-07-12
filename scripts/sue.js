@@ -48,11 +48,9 @@ function decryptFile() {
     let file = this.files[0];
     const reader = new FileReader();
     reader.onload = function () {
-        console.log(file, reader.result);
         let fileData = SueFiles.getBase64FromBinaryFileString(reader.result);
         let decryptedBase64 = SueEncryption.decryptData(fileData, loadedKey.data, 0);
         let fileObj = JSON.parse(SueEncoding.decodeUtf8FromBase64(decryptedBase64));
-        console.log(fileObj);
         SueFiles.downloadFile(fileObj.data, fileObj.name, fileObj.mimeType, true);
     };
     reader.readAsDataURL(file);
@@ -115,7 +113,6 @@ function onClickReadKeyFile() {
 function onClickEncryptText() {
     let taEncrypt = document.getElementById("taEncrypt");
     var originalText = taEncrypt.value;
-    console.log(SueEncoding.encodeUtf8AsBase64(originalText));
     var encryptedTextBase64 = SueEncryption.encryptData(SueEncoding.encodeUtf8AsBase64(originalText), loadedKey.data, 0);
     let taDecrypt = document.getElementById("taDecrypt");
     taDecrypt.value = encryptedTextBase64;

@@ -7,6 +7,13 @@ class SueEncoding {
     };
 
     static decodeUtf8FromBase64(base64) {
-        return Base64.decode(base64);
-      };
-  }
+        let decoded = Base64.decode(base64);
+
+        for (let index = 0; index < 3; index++) {
+            if (decoded[decoded.length - 1] == '\u0000')
+                decoded = decoded.substring(0, decoded.length - 1);
+        }
+
+        return decoded;
+    };
+}
