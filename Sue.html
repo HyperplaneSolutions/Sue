@@ -32,6 +32,7 @@ SOFTWARE. -->
     <link href="libs/light-modal/light-modal.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style/carousel.css">
     <link href="libs/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet">
+    <link href="libs/lds-loader.css" rel="stylesheet">
     <link rel="stylesheet" href="style/sue.css">
 
     <script src="scripts/libs/jquery-3.6.0.min.js"></script>
@@ -77,8 +78,11 @@ SOFTWARE. -->
         </div>
 
         <div class="sue-app">
+            <!-- <div class="lds-dual-ring"></div> -->
+            <div id="loader" class="lds-dual-ring hidden overlay"></div>
             <div class="key-selection">
-                <button class="block-btn" type="button" onclick="onClickGenerateKeyFile();"> Generate Key </button>
+                <a href="#modalKeyOptions" class="btn d-none" id="aOpenModal"></a>
+                <button class="block-btn" type="button" onclick="onClickOpenGenerateKeyModal();"> Generate Key </button>
                 <input type="file" id="keyFileInput" accept="*" class="visually-hidden">
                 <button class="block-btn" type="button" onclick="onClickReadKeyFile();"> Load Existing Key </button>
                 <div class="key-div d-none">
@@ -90,16 +94,32 @@ SOFTWARE. -->
 
             <div class="operation-selection d-none">
                 <div class="carousel">
+                    <div class="key-start-selector-div">
+                        <label> Key Start Index (6 bit interval) MAX: <span></span> </label>
+                        <input type="number" id="tbKeyStart" value="0" min="0" onfocusout="assumeMaxKeyStart()"/>
+                    </div>
                     <div class="operation-switch">
                         <button id="btnEncrypt" class="block-btn active" type="button" onclick="showSectionEncrypt();"> Encrypt </button>
                         <button id="btnDecrypt" class="block-btn" type="button" onclick="showSectionDecrypt();"> Decrypt </button>
                     </div>
 
-
                     <div class="carousel-inner">
+                        <div class="text-area text-area-encrypt">
+                            <textarea id="taEncrypt" placeholder="Enter the data you want to encrypt" lang="UTF-8" class="left"></textarea>
+                            <i class="fas fa-lock-open active"></i>
+                        </div>
 
-                        <textarea id="taEncrypt" placeholder="Enter the data you want to encrypt" lang="UTF-8" class="left"></textarea>
-                        <textarea id="taDecrypt" placeholder="Enter the data you want to decrypt" lang="UTF-8" class="right"></textarea>
+                        <div class="text-area text-area-decrypt">
+                            <textarea id="taDecrypt" placeholder="Enter the data you want to decrypt" lang="UTF-8" class="right"></textarea>
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        
+                        <div class="info-text d-none">
+                            You have just encrypted something with Sue using a key <span id="spanKeyName"></span> with a Key Start Index of  <span id="spanKeyStart"></span>.
+                            <br/>
+                            Remember: To decrypt it, you will need to use the right key and select the right Key Start Index on the decrypting side, so that Sue will know which part of the key you used to encrypt it. This way we can use a large key to
+                            encrypt thousands of messages without leaving ourselves open to attacks.
+                        </div>
 
                         <div id="slide-encryption" class="operation">
                             <button type="button" class="block-btn" onclick="onClickEncryptText();"> <i class="fas fa-lock"></i> Encrypt Text </button>
@@ -124,7 +144,30 @@ SOFTWARE. -->
 
     </div>
 
-
+    <div class="light-modal" id="modalKeyOptions" role="dialog" aria-labelledby="light-modal-label" aria-hidden="false">
+        <div class="light-modal-content animated zoomInUp">
+            <!-- light modal header -->
+            <div class="light-modal-header">
+                <h3 class="light-modal-heading">Key Options</h3>
+                <a href="#" class="light-modal-close-icon" aria-label="close">&times;</a>
+            </div>
+            <!-- light modal body -->
+            <div class="light-modal-body">
+                <span id="spanKeyInfo">How big do you want this key to be?</span>
+                <span id="spanKeyInfoAdditional">The key has to be at least the same size as the file/text you wish to encrypt.<br/> Sue also has an option to use a specific part of the key (Key Start Index) so that a large key can encrypt thousands of files and messages without even reusing the same key code</span>      
+                <div class="key-size-group">
+                    <input id="tbKeySize" type="number" min="1" value="10" />
+                    <span>Kb</span>
+                </div>
+                
+            </div>
+            <!-- light modal footer -->
+            <div class="light-modal-footer">
+                <a href="#" class="light-modal-close-btn d-none" id="btnCloseModal" aria-label="close">Close</a>
+                <button class="block-btn" onclick="onClickGenerateKeyFile();"> Generate </button>
+            </div>
+        </div>
+    </div>
 
 </body>
 

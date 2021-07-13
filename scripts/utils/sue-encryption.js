@@ -4,8 +4,11 @@ class SueEncryption {
     static generateKey(sizeBytes) {
         let cryptoObj = window.crypto || window.msCrypto; // for IE 11
 
-        if (typeof cryptoObj == 'undefined' || typeof cryptoObj.getRandomValues == 'undefined')
-            throw "This browser doesn't support window.crypto or window.msCrypto - try Mozilla Firefox or Chrome";
+        if (typeof cryptoObj == 'undefined' || typeof cryptoObj.getRandomValues == 'undefined'){
+            showBusy(false);
+            toastr.error("This browser doesn't support window.crypto or window.msCrypto - try Mozilla Firefox or Chrome");
+            return null;
+        }
 
         if (sizeBytes % this.#KEY_SIZE_STEP != 0)
             sizeBytes += this.#KEY_SIZE_STEP - (sizeBytes % this.#KEY_SIZE_STEP);
@@ -35,17 +38,29 @@ class SueEncryption {
     }
 
     static encryptData(base64Data, key, keyStartIndex) {
-        if (base64Data == null && base64Data.length == 0)
-            throw "Nothing to encrypt";
+        if (base64Data == null && base64Data.length == 0){
+            showBusy(false);
+            toastr.error("Nothing to encrypt");
+            return null;
+        }
 
-        if (key == null && key.length == 0)
-            throw "Valid key doesn't exist";
+        if (key == null && key.length == 0){
+            showBusy(false);
+            toastr.error("Valid key doesn't exist");
+            return null;
+        }
 
-        if (key.length < keyStartIndex)
-            throw "Key start index too big/ key too short";
+        if (key.length < keyStartIndex){
+            showBusy(false);
+            toastr.error("Key start index too big/ key too short");
+            return null;
+        }
 
-        if (base64Data.length > (key.length - keyStartIndex))
-            throw "With this start index the key is too small for the amount of data you are trying to encrypt";
+        if (base64Data.length > (key.length - keyStartIndex)){
+            showBusy(false);
+            toastr.error("With this start index the key is too small for the amount of data you are trying to encrypt");
+            return null;
+        }
 
 
         let encryptedArray = [];
@@ -62,17 +77,29 @@ class SueEncryption {
     }
 
     static decryptData(base64Encrypted, key, keyStartIndex) {
-        if (base64Encrypted == null && base64Encrypted.length == 0)
-            throw "Nothing to decrypt";
+        if (base64Encrypted == null && base64Encrypted.length == 0){
+            showBusy(false);
+            toastr.error("Nothing to decrypt");
+            return null;
+        }
 
-        if (key == null && key.length == 0)
-            throw "Valid key doesn't exist";
+        if (key == null && key.length == 0){
+            showBusy(false);
+            toastr.error("Valid key doesn't exist");
+            return null;
+        }
 
-        if (key.length < keyStartIndex)
-            throw "Key start index too big/ key too short";
+        if (key.length < keyStartIndex){
+            showBusy(false);
+            toastr.error("Key start index too big/ key too short");
+            return null;
+        }
 
-        if (base64Encrypted.length > (key.length - keyStartIndex))
-            throw "With this start index the key is too small for the amount of data you are trying to decrypt";
+        if (base64Encrypted.length > (key.length - keyStartIndex)){
+            showBusy(false);
+            toastr.error("With this start index the key is too small for the amount of data you are trying to decrypt");
+            return null;
+        }
 
 
         let decryptedArray = [];
