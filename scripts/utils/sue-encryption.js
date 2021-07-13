@@ -1,5 +1,5 @@
 class SueEncryption {
-    static #KEY_SIZE_STEP = 1368; // Dues to data loss from storing the key file in base64 it is neccessary to generate additional signs to store 1024 full bytes
+    static KEY_SIZE_STEP = 1368; // Dues to data loss from storing the key file in base64 it is neccessary to generate additional signs to store 1024 full bytes
 
     static generateKey(sizeBytes) {
         let cryptoObj = window.crypto || window.msCrypto; // for IE 11
@@ -10,17 +10,17 @@ class SueEncryption {
             return null;
         }
 
-        if (sizeBytes % this.#KEY_SIZE_STEP != 0)
-            sizeBytes += this.#KEY_SIZE_STEP - (sizeBytes % this.#KEY_SIZE_STEP);
+        if (sizeBytes % this.KEY_SIZE_STEP != 0)
+            sizeBytes += this.KEY_SIZE_STEP - (sizeBytes % this.KEY_SIZE_STEP);
 
         if (sizeBytes % 2 != 0)
             sizeBytes += 1;
 
-        const stepsToCreateKey = sizeBytes / this.#KEY_SIZE_STEP;
+        const stepsToCreateKey = sizeBytes / this.KEY_SIZE_STEP;
         let keyArray = [];
 
         for (let i = 0; i < stepsToCreateKey; i++) {
-            let randoms = new Uint8Array(this.#KEY_SIZE_STEP);
+            let randoms = new Uint8Array(this.KEY_SIZE_STEP);
             cryptoObj.getRandomValues(randoms);
 
             let randomBase64 = [];

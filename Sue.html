@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-
-<!--MIT License Copyright (c) 2021 Filip Bebić
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. -->
-
 <html>
 
 <head>
     <title>Sue</title>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+    <!--MIT License Copyright (c) 2021 Filip Bebić
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. -->
+
+
     <link
         href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACm0lEQVRYhe3WX0hTURwH8AX1YBQxqQ2ul4wmIhO3dNVWw1BD2S6WMMW9SWjm21jRkw++tPkY5HY3UUvBSEu9f2Y6Z4pFwjAiNCVb/0x7qh6CeprHzq+Xro3lvXP3ziDwB+fp/u7v++FwDveqVLv1P5b9iL2uR98bGzGw8REju96r71upJeobdzzYoim1sgYeMwYOxJZNY3PsSHiN1nE5MWjEyG506buXAgXBBcbIocRnbt11T0bDySwyJzHgdPbZM8k9+QeLChgD91PoKTlcYsoY4L5h6JswWK1WHxLrM5lM+xJ2aD0j4QRB7BeGNpPNban6HYTDKfSTWWSOYkBVtr1OGFhWVrZ3O+8I/U1EU0pwynLlujzCwO2+I9wUj87LKAa4j7rb5QJu5Hn5XYBiAADsUbIUhd/1PI7O3PkK0/0/YGoQwdQwhkcMhgiLIcxhGOcxPAxhCI1i4McwsOMYmDCG4TCGBxMYBicx3OxbjsoKL84r1s91xeBpzxooRRQWlurTBtRYbdR853PIBOKc7RKVPsBcTr0MRkAUMYiAuzAL3MVZCA9vSCLKK2UBrNQiPQBiCMbI//kMG3nJnZAFqDWfpJY6/LAlovvzX/8BkaENUYRMwAnqta8dxBDJOyB1JmQCiqi3/lYQQ0SuzG0Cxq6+kTyYlfIA+dR72gViCO7U6CaAtYxL3g5ZgHrrcWol0AhbIgIR4Ew8sKbQ7zUqeUXlAcy51GrACaIIqSuahJAFcFpI+1qgGjKBqKposKcN0GkPaD7RFZAJhFar06QNUKlUqmvUsZZV3/n4qr8afaTr0Qe6Cb3zu1DM14pedXjR4i0fWvDfQ/P0BHoRfIaincvoSdcamrn9BU33f0eTA/F4g7OtRVb4bv2r+gVF7w/goRt6YgAAAABJRU5ErkJggg=="
         rel="icon" type="image/x-icon" />
@@ -96,44 +98,55 @@ SOFTWARE. -->
                 <div class="carousel">
                     <div class="key-start-selector-div">
                         <label> Key Start Index (6 bit interval) MAX: <span></span> </label>
-                        <input type="number" id="tbKeyStart" value="0" min="0" onfocusout="assumeMaxKeyStart()"/>
+                        <input type="number" id="tbKeyStart" value="0" min="0" onfocusout="assumeMaxKeyStart()" />
                     </div>
                     <div class="operation-switch">
-                        <button id="btnEncrypt" class="block-btn active" type="button" onclick="showSectionEncrypt();"> Encrypt </button>
-                        <button id="btnDecrypt" class="block-btn" type="button" onclick="showSectionDecrypt();"> Decrypt </button>
+                        <button id="btnEncrypt" class="block-btn active" type="button" onclick="showSectionEncrypt();">
+                            Encrypt </button>
+                        <button id="btnDecrypt" class="block-btn" type="button" onclick="showSectionDecrypt();"> Decrypt
+                        </button>
                     </div>
 
                     <div class="carousel-inner">
                         <div class="text-area text-area-encrypt">
-                            <textarea id="taEncrypt" placeholder="Enter the data you want to encrypt" lang="UTF-8" class="left"></textarea>
+                            <textarea id="taEncrypt" placeholder="Enter the data you want to encrypt" lang="UTF-8"
+                                class="left"></textarea>
                             <i class="fas fa-lock-open active"></i>
                         </div>
 
                         <div class="text-area text-area-decrypt">
-                            <textarea id="taDecrypt" placeholder="Enter the data you want to decrypt" lang="UTF-8" class="right"></textarea>
+                            <textarea id="taDecrypt" placeholder="Enter the data you want to decrypt" lang="UTF-8"
+                                class="right"></textarea>
                             <i class="fas fa-lock"></i>
                         </div>
-                        
+
                         <div class="info-text d-none">
-                            You have just encrypted something with Sue using a key <span id="spanKeyName"></span> with a Key Start Index of  <span id="spanKeyStart"></span>.
-                            <br/>
-                            Remember: To decrypt it, you will need to use the right key and select the right Key Start Index on the decrypting side, so that Sue will know which part of the key you used to encrypt it. This way we can use a large key to
+                            You have just encrypted something with Sue using a key <span id="spanKeyName"></span> with a
+                            Key Start Index of <span id="spanKeyStart"></span>.
+                            <br />
+                            Remember: To decrypt it, you will need to use the right key and select the right Key Start
+                            Index on the decrypting side, so that Sue will know which part of the key you used to
+                            encrypt it. This way we can use a large key to
                             encrypt thousands of messages without leaving ourselves open to attacks.
                         </div>
 
                         <div id="slide-encryption" class="operation">
-                            <button type="button" class="block-btn" onclick="onClickEncryptText();"> <i class="fas fa-lock"></i> Encrypt Text </button>
+                            <button type="button" class="block-btn" onclick="onClickEncryptText();"> <i
+                                    class="fas fa-lock"></i> Encrypt Text </button>
 
                             <input type="file" id="encryptFileInput" accept="*" class="visually-hidden">
-                            <button type="button" class="block-btn" onclick="onClickEncryptFile();"> <i class="fas fa-file-upload"></i> Encrypt File </button>
+                            <button type="button" class="block-btn" onclick="onClickEncryptFile();"> <i
+                                    class="fas fa-file-upload"></i> Encrypt File </button>
 
                         </div>
                         <div id="slide-decryption" class="d-none operation">
-                            
-                            <button type="button" class="block-btn" onclick="onClickDecryptText();"> <i class="fas fa-lock-open"></i> Decrypt Text </button>
+
+                            <button type="button" class="block-btn" onclick="onClickDecryptText();"> <i
+                                    class="fas fa-lock-open"></i> Decrypt Text </button>
 
                             <input type="file" id="decryptFileInput" accept="*" class="visually-hidden">
-                            <button type="button" class="block-btn" onclick="onClickDecryptFile();"> <i class="fas fa-file-upload"></i>  Decrypt File </button>
+                            <button type="button" class="block-btn" onclick="onClickDecryptFile();"> <i
+                                    class="fas fa-file-upload"></i> Decrypt File </button>
                         </div>
                     </div>
                 </div>
@@ -154,12 +167,14 @@ SOFTWARE. -->
             <!-- light modal body -->
             <div class="light-modal-body">
                 <span id="spanKeyInfo">How big do you want this key to be?</span>
-                <span id="spanKeyInfoAdditional">The key has to be at least the same size as the file/text you wish to encrypt.<br/> Sue also has an option to use a specific part of the key (Key Start Index) so that a large key can encrypt thousands of files and messages without even reusing the same key code</span>      
+                <span id="spanKeyInfoAdditional">The key has to be at least the same size as the file/text you wish to
+                    encrypt.<br /> Sue also has an option to use a specific part of the key (Key Start Index) so that a
+                    large key can encrypt thousands of files and messages without even reusing the same key code</span>
                 <div class="key-size-group">
                     <input id="tbKeySize" type="number" min="1" value="10" />
                     <span>Kb</span>
                 </div>
-                
+
             </div>
             <!-- light modal footer -->
             <div class="light-modal-footer">
